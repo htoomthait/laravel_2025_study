@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head } from '@inertiajs/react'
 import React from 'react'
+import { route } from 'ziggy-js';
 
 const Users = ({ users }) => {
     console.log(users);
@@ -32,22 +33,33 @@ const Users = ({ users }) => {
                                 </thead>
 
                                 <tbody className="divide-y divide-gray-200">
-                                    {users.map(user => (
-                                        <tr key={user.id}>
-                                            <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{user.name}</td>
-                                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.created_at}</td>
-                                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.email}</td>
-                                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.updated_at}</td>
-                                            <td className="whitespace-nowrap px-4 py-2">
-                                                <a
-                                                    href="#"
-                                                    className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                                                >
-                                                    View
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {users.map((user) => {
+
+                                        return (
+                                            <tr key={user.id}>
+                                                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{user.name}</td>
+                                                <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.created_at}</td>
+                                                <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.email}</td>
+                                                <td className="whitespace-nowrap px-4 py-2 text-gray-700">{user.updated_at}</td>
+                                                <td className="whitespace-nowrap px-4 py-2">
+                                                    <a
+                                                        href={`users/${user.id}`}
+                                                        className="inline-block rounded bg-yellow-400 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-500"
+                                                    >
+                                                        Edit
+                                                    </a>
+                                                    <a
+                                                        href="{{ route('users.destroy', $user->id) }}"
+                                                        className="inline-block rounded ml-1 bg-red-400 px-4 py-2 text-xs font-medium text-white hover:bg-red-500"
+                                                    >
+                                                        Delete
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+                                        );
+
+                                    })}
 
 
 
